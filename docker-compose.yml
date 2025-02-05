@@ -1,5 +1,3 @@
-version: '4'
-
 networks:
     brNet:
         driver: bridge

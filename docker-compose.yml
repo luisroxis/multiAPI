@@ -1,0 +1,37 @@
+version: '3'
+
+networks:
+    brNet:
+        driver: bridge
+
+services:
+    nginx:
+        build:
+            context: ./
+            args:
+                NGINX_VERSION: '1.25.2'
+        ports:
+            - '80:80'
+            - '443:443'
+        volumes:
+             - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+             - ./nginx/sites-available:/etc/nginx/sites-available
+             - ./nginx/conf.d:/etc/nginx/conf.d
+             - ./nginx/letsencrypt:/etc/letsencrypt
+        networks:
+            - brNet
+    
+    apiBr:
+        image: luisroxis/boraracharapi:20241203183632
+        container_name: apiBrclear 
+        ports:
+            - '8080:80'
+        networks:
+            - brNet
+    apiMicro:
+        image: luisroxis/microerpapi:20241204181513
+        container_name: apiMicroErp
+        ports:
+            - '8081:80'
+        networks:
+            - brNet

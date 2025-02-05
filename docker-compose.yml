@@ -28,6 +28,8 @@ services:
             - '8080:80'
         networks:
             - brNet
+        depends_on:
+            - nginx
     apiMicro:
         image: luisroxis/microerpapi:20241204181513
         container_name: apiMicroErp
@@ -35,3 +37,6 @@ services:
             - '8081:80'
         networks:
             - brNet
+        depends_on:
+            - nginx
+            - apiBr

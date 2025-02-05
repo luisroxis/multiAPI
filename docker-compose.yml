@@ -5,7 +5,9 @@ networks:
 services:
     nginx:
         build:
-            context: ./           
+            context: ./
+            args:
+                NGINX_VERSION: '1.25.2'
         ports:
             - '80:80'
             - '443:443'
